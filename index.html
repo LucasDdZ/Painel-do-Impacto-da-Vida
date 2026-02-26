@@ -187,14 +187,12 @@ function iniciarRelogio(){
     const meses = Math.floor(dias / 30.44);
     const anos = Math.floor(dias / 365.25);
 
-    document.getElementById("contador").innerHTML = `
-      <div>🧬 ${anos.toLocaleString()} anos</div>
-      <div>📅 ${meses.toLocaleString()} meses</div>
-      <div>🌎 ${dias.toLocaleString()} dias</div>
-      <div>⏰ ${horas.toLocaleString()} horas</div>
-      <div>⏳ ${minutos.toLocaleString()} minutos</div>
-      <div>⚡ ${segundos.toLocaleString()} segundos</div>
-    `;
+    document.getElementById("anos").textContent = anos.toLocaleString();
+document.getElementById("meses").textContent = meses.toLocaleString();
+document.getElementById("dias").textContent = dias.toLocaleString();
+document.getElementById("horas").textContent = horas.toLocaleString();
+document.getElementById("minutos").textContent = minutos.toLocaleString();
+document.getElementById("segundos").textContent = segundos.toLocaleString();
 
   }, 1000);
 }
@@ -210,7 +208,7 @@ function calcularDias(){
   const diff = expectativa - agora;
 
   if(diff <= 0){
-    document.getElementById("resultadoDias").innerHTML =
+    document.getElementBy("resultadoDias").innerHTML =
       "Você já ultrapassou a estimativa de 80 anos 👏";
     return;
   }
