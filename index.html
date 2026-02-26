@@ -131,7 +131,7 @@ footer{
 </div>
 
 <!-- DIAS RESTANTES -->
-<div id="dias" class="secao">
+<div id="secaoDiasRestantes" class="secao">
 <h2>Tempo Restante até 80 anos</h2>
 <input type="date" id="dataDias">
 <br>
@@ -217,20 +217,20 @@ function calcularDias(){
   const diff = expectativa - agora;
 
   if(diff <= 0){
-    document.getElementBy("resultadoDias").innerHTML =
+    document.getElementById("resultadoDias").innerHTML =
       "Você já ultrapassou a estimativa de 80 anos 👏";
     return;
   }
 
-  const horas = Math.floor(diff / (1000 * 60 * 60));
   const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
   const meses = Math.floor(dias / 30.44);
+  const anos = Math.floor(dias / 365.25);
 
- document.getElementById("tempoRestante").innerHTML = `
-  <div>${anosRestantes} anos</div>
-  <div>${mesesRestantes} meses</div>
-  <div>${diasRestantes} dias</div>
-`;
+  document.getElementById("resultadoDias").innerHTML = `
+    <div>⏳ ${anos} anos restantes</div>
+    <div>📅 ${meses} meses restantes</div>
+    <div>🌎 ${dias} dias restantes</div>
+  `;
 }
 
 // TEMPO PERDIDO
