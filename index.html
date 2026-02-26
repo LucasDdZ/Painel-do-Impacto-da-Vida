@@ -187,21 +187,14 @@ function iniciarRelogio(){
     const meses = Math.floor(dias / 30.44);
     const anos = Math.floor(dias / 365.25);
 
-    document.getElementById("anos").textContent = anos.toLocaleString();
-document.getElementById("meses").textContent = meses.toLocaleString();
-document.getElementById("dias").textContent = dias.toLocaleString();
-document.getElementById("horas").textContent = horas.toLocaleString();
-document.getElementById("minutos").textContent = minutos.toLocaleString();
-document.getElementById("segundos").textContent = segundos.toLocaleString();
-
-    <div class="resultado">
-  <div>🧬 <strong id="anos">0</strong> anos</div>
-  <div>📅 <strong id="meses">0</strong> meses</div>
-  <div>🌎 <strong id="dias">0</strong> dias</div>
-  <div>⏰ <strong id="horas">0</strong> horas</div>
-  <div>⏳ <strong id="minutos">0</strong> minutos</div>
-  <div>⚡ <strong id="segundos">0</strong> segundos</div>
-</div>
+  document.getElementById("contador").innerHTML = `
+  <div>🧬 ${anos.toLocaleString()} anos</div>
+  <div>📅 ${meses.toLocaleString()} meses</div>
+  <div>🌎 ${dias.toLocaleString()} dias</div>
+  <div>⏰ ${horas.toLocaleString()} horas</div>
+  <div>⏳ ${minutos.toLocaleString()} minutos</div>
+  <div>⚡ ${segundos.toLocaleString()} segundos</div>
+`;
 
   }, 1000);
 }
