@@ -122,12 +122,12 @@ footer{
 <br>
 <button onclick="iniciarRelogio()">Iniciar</button>
 <div id="contador" class="resultado">
-  <div>🧬 <strong id="anos">0</strong> anos</div>
-  <div>📅 <strong id="meses">0</strong> meses</div>
-  <div>🌎 <strong id="dias">0</strong> dias</div>
-  <div>⏰ <strong id="horas">0</strong> horas</div>
-  <div>⏳ <strong id="minutos">0</strong> minutos</div>
-  <div>⚡ <strong id="segundos">0</strong> segundos</div>
+  <div>🧬 <span id="anos">0</span> anos</div>
+  <div>📅 <span id="meses">0</span> meses</div>
+  <div>🌎 <span id="dias">0</span> dias</div>
+  <div>⏰ <span id="horas">0</span> horas</div>
+  <div>⏳ <span id="minutos">0</span> minutos</div>
+  <div>⚡ <span id="segundos">0</span> segundos</div>
 </div>
 
 <!-- DIAS RESTANTES -->
@@ -177,29 +177,31 @@ function mostrar(id){
 let intervalo;
 
 function iniciarRelogio(){
-  clearInterval(intervalo);
+
+  if(intervalo){
+    clearInterval(intervalo);
+  }
 
   const nascimento = new Date(document.getElementById("dataNascimento").value);
 
   intervalo = setInterval(() => {
 
     const agora = new Date();
-    const diff = agora - nascimento;
+    const diferenca = agora - nascimento;
 
-    const segundos = Math.floor(diff / 1000);
+    const segundos = Math.floor(diferenca / 1000);
     const minutos = Math.floor(segundos / 60);
     const horas = Math.floor(minutos / 60);
     const dias = Math.floor(horas / 24);
     const meses = Math.floor(dias / 30.44);
     const anos = Math.floor(dias / 365.25);
 
-document.getElementById("anos").textContent = anos.toLocaleString();
-document.getElementById("meses").textContent = meses.toLocaleString();
-document.getElementById("dias").textContent = dias.toLocaleString();
-document.getElementById("horas").textContent = horas.toLocaleString();
-document.getElementById("minutos").textContent = minutos.toLocaleString();
-document.getElementById("segundos").textContent = segundos.toLocaleString();
-
+    document.getElementById("anos").textContent = anos.toLocaleString();
+    document.getElementById("meses").textContent = meses.toLocaleString();
+    document.getElementById("dias").textContent = dias.toLocaleString();
+    document.getElementById("horas").textContent = horas.toLocaleString();
+    document.getElementById("minutos").textContent = minutos.toLocaleString();
+    document.getElementById("segundos").textContent = segundos.toLocaleString();
 
   }, 1000);
 }
