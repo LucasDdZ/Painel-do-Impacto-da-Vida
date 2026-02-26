@@ -121,7 +121,13 @@ footer{
 <input type="date" id="dataNascimento">
 <br>
 <button onclick="iniciarRelogio()">Iniciar</button>
-<div id="contador" class="resultado"></div>
+<div id="contador" class="resultado">
+  <div>🧬 <strong id="anos">0</strong> anos</div>
+  <div>📅 <strong id="meses">0</strong> meses</div>
+  <div>🌎 <strong id="dias">0</strong> dias</div>
+  <div>⏰ <strong id="horas">0</strong> horas</div>
+  <div>⏳ <strong id="minutos">0</strong> minutos</div>
+  <div>⚡ <strong id="segundos">0</strong> segundos</div>
 </div>
 
 <!-- DIAS RESTANTES -->
@@ -194,14 +200,6 @@ document.getElementById("horas").textContent = horas.toLocaleString();
 document.getElementById("minutos").textContent = minutos.toLocaleString();
 document.getElementById("segundos").textContent = segundos.toLocaleString();
 
-    <div class="resultado">
-  <div>🧬 <strong id="anos">0</strong> anos</div>
-  <div>📅 <strong id="meses">0</strong> meses</div>
-  <div>🌎 <strong id="dias">0</strong> dias</div>
-  <div>⏰ <strong id="horas">0</strong> horas</div>
-  <div>⏳ <strong id="minutos">0</strong> minutos</div>
-  <div>⚡ <strong id="segundos">0</strong> segundos</div>
-</div>
 
   }, 1000);
 }
