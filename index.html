@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impacto da Sua Vida</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f3f4f6;
+  text-align:center;
+}
+
+header{
+  background:linear-gradient(90deg,#2563eb,#7c3aed);
+  color:white;
+  padding:20px;
+}
+
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  padding:15px;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button:hover{
+  background:#1d4ed8;
+}
+
+.secao{
+  display:none;
+  padding:20px;
+}
+
+input{
+  padding:8px;
+  margin:5px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+.resultado{
+  margin-top:15px;
+  font-size:22px;
+  font-weight:bold;
+  color:#7c3aed;
+}
+
+.anuncio{
+  margin:25px 0;
+  padding:15px;
+  background:#e5e7eb;
+  border-radius:8px;
+  font-size:14px;
+}
+footer{
+  margin-top:30px;
+  padding:15px;
+  background:#ddd;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Impacto da Sua Vida</h1>
+<p>Descubra o verdadeiro impacto do seu tempo</p>
+</header>
+
+<div class="anuncio">Espaço para anúncio</div>
+
+<nav>
+<button onclick="mostrar('relogio')">⏳ Relógio</button>
+<button onclick="mostrar('dias')">📅 Dias Restantes</button>
+<button onclick="mostrar('tempo')">💤 Tempo Perdido</button>
+<button onclick="mostrar('amor')">❤️ Compatibilidade</button>
+</nav>
+
+<!-- RELÓGIO -->
+<div id="relogio" class="secao">
+<h2>Relógio da Vida</h2>
+<input type="date" id="dataNascimento">
+<br>
+<button onclick="iniciarRelogio()">Iniciar</button>
+<div id="contador" class="resultado"></div>
+</div>
+
+<!-- DIAS RESTANTES -->
+<div id="dias" class="secao">
+<h2>Dias Restantes até 80 anos</h2>
+<input type="date" id="dataDias">
+<br>
+<button onclick="calcularDias()">Calcular</button>
+<div id="resultadoDias" class="resultado"></div>
+</div>
+
+<!-- TEMPO PERDIDO -->
+<div id="tempo" class="secao">
+<h2>Tempo Perdido Dormindo</h2>
+<input type="number" id="idadeTempo" placeholder="Sua idade">
+<br>
+<button onclick="calcularTempo()">Calcular</button>
+<div id="resultadoTempo" class="resultado"></div>
+</div>
+
+<!-- COMPATIBILIDADE -->
+<div id="amor" class="secao">
+<h2>Compatibilidade de Nomes</h2>
+<input type="text" id="nome1" placeholder="Nome 1">
+<input type="text" id="nome2" placeholder="Nome 2">
+<br>
+<button onclick="calcularAmor()">Calcular</button>
+<div id="resultadoAmor" class="resultado"></div>
+</div>
+
+<div class="anuncio">Espaço para anúncio</div>
+
+<footer>
+<a href="sobre.html">Sobre</a> |
+<a href="politica.html">Política de Privacidade</a>
+</footer>
+
+<script>
+function mostrar(id){
+  document.querySelectorAll('.secao').forEach(sec=>{
+    sec.style.display="none";
+  });
+  document.getElementById(id).style.display="block";
+}
+
+// RELÓGIO
+let intervalo;
+function iniciarRelogio(){
+  clearInterval(intervalo);
+  const nascimento=new Date(document.getElementById("dataNascimento").value);
+  intervalo=setInterval(()=>{
+    const agora=new Date();
+    const diff=agora-nascimento;
+    const segundos=Math.floor(diff/1000);
+    document.getElementById("contador").innerText=
+    "Você já viveu "+segundos.toLocaleString()+" segundos.";
+  },1000);
+}
+
+// DIAS RESTANTES
+function calcularDias(){
+  const nascimento=new Date(document.getElementById("dataDias").value);
+  const expectativa=new Date(nascimento);
+  expectativa.setFullYear(expectativa.getFullYear()+80);
+  const agora=new Date();
+  const diff=expectativa-agora;
+  const dias=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("resultadoDias").innerText=
+  "Restam aproximadamente "+dias+" dias.";
+}
+
+// TEMPO PERDIDO
+function calcularTempo(){
+  const idade=document.getElementById("idadeTempo").value;
+  const anosDormindo=idade*0.33;
+  document.getElementById("resultadoTempo").innerText=
+  "Você passou cerca de "+anosDormindo.toFixed(1)+" anos dormindo.";
+}
+
+// COMPATIBILIDADE
+function calcularAmor(){
+  const nome1=document.getElementById("nome1").value;
+  const nome2=document.getElementById("nome2").value;
+  const porcentagem=Math.floor(Math.random()*101);
+  document.getElementById("resultadoAmor").innerText=
+  nome1+" e "+nome2+" têm "+porcentagem+"% de compatibilidade.";
+}
+</script>
+
+</body>
+</html>
