@@ -213,19 +213,16 @@ function calcularTempo(){
     return;
   }
 
-  // 1/3 da vida dormindo
-  const totalDiasDormindo = idade * 365.25 / 3;
+  // Total de dias dormindo (1/3 da vida)
+  const totalDias = (idade * 365.25) / 3;
 
-  const anos = Math.floor(totalDiasDormindo / 365.25);
-  const restoDiasAposAnos = totalDiasDormindo - (anos * 365.25);
-
-  const meses = Math.floor(restoDiasAposAnos / 30);
-  const dias = Math.floor(restoDiasAposAnos - (meses * 30));
-
+  const totalAnos = totalDias / 365.25;
+  const totalMeses = totalDias / 30;
+  
   document.getElementById("resultadoTempo").innerHTML = `
-    <div>🛌 ${anos} anos dormindo</div>
-    <div>📅 ${meses} meses dormindo</div>
-    <div>🌎 ${dias} dias dormindo</div>
+    <div>🛌 ${totalAnos.toFixed(1)} anos dormindo</div>
+    <div>📅 ${Math.floor(totalMeses).toLocaleString()} meses dormindo</div>
+    <div>🌎 ${Math.floor(totalDias).toLocaleString()} dias dormindo</div>
   `;
 }
 
