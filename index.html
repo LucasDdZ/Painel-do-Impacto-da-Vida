@@ -145,16 +145,34 @@ function mostrar(id){
 
 // RELÓGIO
 let intervalo;
+
 function iniciarRelogio(){
   clearInterval(intervalo);
-  const nascimento=new Date(document.getElementById("dataNascimento").value);
-  intervalo=setInterval(()=>{
-    const agora=new Date();
-    const diff=agora-nascimento;
-    const segundos=Math.floor(diff/1000);
-    document.getElementById("contador").innerText=
-    "Você já viveu "+segundos.toLocaleString()+" segundos.";
-  },1000);
+
+  const nascimento = new Date(document.getElementById("dataNascimento").value);
+
+  intervalo = setInterval(() => {
+
+    const agora = new Date();
+    const diff = agora - nascimento;
+
+    const segundos = Math.floor(diff / 1000);
+    const minutos = Math.floor(segundos / 60);
+    const horas = Math.floor(minutos / 60);
+    const dias = Math.floor(horas / 24);
+    const meses = Math.floor(dias / 30.44);
+    const anos = Math.floor(dias / 365.25);
+
+    document.getElementById("contador").innerHTML = `
+      <div>🧬 ${anos.toLocaleString()} anos</div>
+      <div>📅 ${meses.toLocaleString()} meses</div>
+      <div>🌎 ${dias.toLocaleString()} dias</div>
+      <div>⏰ ${horas.toLocaleString()} horas</div>
+      <div>⏳ ${minutos.toLocaleString()} minutos</div>
+      <div>⚡ ${segundos.toLocaleString()} segundos</div>
+    `;
+
+  }, 1000);
 }
 
 // DIAS RESTANTES
