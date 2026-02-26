@@ -102,7 +102,7 @@ footer{
 
 <!-- DIAS RESTANTES -->
 <div id="dias" class="secao">
-<h2>Dias Restantes até 80 anos</h2>
+<h2>Tempo Restante até 80 anos</h2>
 <input type="date" id="dataDias">
 <br>
 <button onclick="calcularDias()">Calcular</button>
@@ -177,22 +177,56 @@ function iniciarRelogio(){
 
 // DIAS RESTANTES
 function calcularDias(){
-  const nascimento=new Date(document.getElementById("dataDias").value);
-  const expectativa=new Date(nascimento);
-  expectativa.setFullYear(expectativa.getFullYear()+80);
-  const agora=new Date();
-  const diff=expectativa-agora;
-  const dias=Math.floor(diff/(1000*60*60*24));
-  document.getElementById("resultadoDias").innerText=
-  "Restam aproximadamente "+dias+" dias.";
+
+  const nascimento = new Date(document.getElementById("dataDias").value);
+  const expectativa = new Date(nascimento);
+  expectativa.setFullYear(expectativa.getFullYear() + 80);
+
+  const agora = new Date();
+  const diff = expectativa - agora;
+
+  if(diff <= 0){
+    document.getElementById("resultadoDias").innerHTML =
+      "Você já ultrapassou a estimativa de 80 anos 👏";
+    return;
+  }
+
+  const horas = Math.floor(diff / (1000 * 60 * 60));
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const meses = Math.floor(dias / 30.44);
+
+  document.getElementById("resultadoDias").innerHTML = `
+    <div>📅 ${meses.toLocaleString()} meses restantes</div>
+    <div>🌎 ${dias.toLocaleString()} dias restantes</div>
+    <div>⏰ ${horas.toLocaleString()} horas restantes</div>
+  `;
 }
 
 // TEMPO PERDIDO
-function calcularTempo(){
-  const idade=document.getElementById("idadeTempo").value;
-  const anosDormindo=idade*0.33;
-  document.getElementById("resultadoTempo").innerText=
-  "Você passou cerca de "+anosDormindo.toFixed(1)+" anos dormindo.";
+function calcularDias(){
+
+  const nascimento = new Date(document.getElementById("dataDias").value);
+  const expectativa = new Date(nascimento);
+  expectativa.setFullYear(expectativa.getFullYear() + 80);
+
+  const agora = new Date();
+  const diff = expectativa - agora;
+
+  if(diff <= 0){
+    document.getElementById("resultadoDias").innerHTML =
+      "Você já ultrapassou a estimativa de 80 anos 👏";
+    return;
+  }
+
+  const horas = Math.floor(diff / (1000 * 60 * 60));
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const meses = Math.floor(dias / 30.44);
+
+  document.getElementById("resultadoDias").innerHTML = `
+    <div>📅 ${meses.toLocaleString()} meses restantes</div>
+    <div>🌎 ${dias.toLocaleString()} dias restantes</div>
+    <div>⏰ ${horas.toLocaleString()} horas restantes</div>
+  `;
 }
 
 // COMPATIBILIDADE
