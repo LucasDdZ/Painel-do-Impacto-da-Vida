@@ -203,29 +203,32 @@ function calcularDias(){
 }
 
 // TEMPO PERDIDO
-function calcularDias(){
+function calcularTempo(){
 
-  const nascimento = new Date(document.getElementById("dataDias").value);
-  const expectativa = new Date(nascimento);
-  expectativa.setFullYear(expectativa.getFullYear() + 80);
+  const idade = parseFloat(document.getElementById("idadeTempo").value);
 
-  const agora = new Date();
-  const diff = expectativa - agora;
-
-  if(diff <= 0){
-    document.getElementById("resultadoDias").innerHTML =
-      "Você já ultrapassou a estimativa de 80 anos 👏";
+  if(isNaN(idade) || idade <= 0){
+    document.getElementById("resultadoTempo").innerHTML =
+      "Digite uma idade válida.";
     return;
   }
 
-  const horas = Math.floor(diff / (1000 * 60 * 60));
-  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const meses = Math.floor(dias / 30.44);
+  // 8 horas por dia = 1/3 da vida dormindo
+  const anosDormindoTotal = idade / 3;
 
-  document.getElementById("resultadoDias").innerHTML = `
-    <div>📅 ${meses.toLocaleString()} meses restantes</div>
-    <div>🌎 ${dias.toLocaleString()} dias restantes</div>
-    <div>⏰ ${horas.toLocaleString()} horas restantes</div>
+  // Separando anos inteiros
+  const anos = Math.floor(anosDormindoTotal);
+
+  // Convertendo parte decimal para dias
+  const diasTotais = (anosDormindoTotal - anos) * 365.25;
+
+  const meses = Math.floor(diasTotais / 30.44);
+  const dias = Math.floor(diasTotais % 30.44);
+
+  document.getElementById("resultadoTempo").innerHTML = `
+    <div>🛌 ${anos} anos dormindo</div>
+    <div>📅 ${meses} meses dormindo</div>
+    <div>🌎 ${dias} dias dormindo</div>
   `;
 }
 
