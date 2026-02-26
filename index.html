@@ -2,30 +2,25 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Impacto da Sua Vida</title>
-
+<title>Relógio da Vida</title>
 
 <style>
 body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#f3f4f6;
+  font-family: Arial, sans-serif;
   text-align:center;
-}
-
-header{
-  background:linear-gradient(90deg,#2563eb,#7c3aed);
-  color:white;
+  background:#f3f4f6;
   padding:20px;
 }
 
-nav{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:10px;
-  padding:15px;
+h2{
+  margin-top:40px;
+}
+
+input{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  margin:5px;
 }
 
 button{
@@ -45,83 +40,35 @@ button:hover{
   box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
 
-button:hover{
-  background:#1d4ed8;
-}
-
-.secao{
-  display:none;
-  padding:20px;
-}
-
-input{
-  padding:8px;
-  margin:5px;
-  border-radius:6px;
-  border:1px solid #ccc;
-}
-
 .resultado{
   margin-top:20px;
-  font-size:28px;
-  font-weight:bold;
-  line-height:1.6;
+  font-size:20px;
 }
 
 .resultado div{
-  font-size:32px;
-  margin:10px 0;
+  margin:8px 0;
   padding:12px;
   border-radius:12px;
   background:linear-gradient(90deg,#7c3aed,#2563eb);
   color:white;
-  box-shadow:0 4px 10px rgba(0,0,0,0.15);
-  animation:fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-.anuncio{
-  margin:25px 0;
-  padding:15px;
-  background:#e5e7eb;
-  border-radius:8px;
-  font-size:14px;
-}
-footer{
-  margin-top:30px;
-  padding:15px;
-  background:#ddd;
+  font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>Relógio da Vida Online | Tempo Restante e Tempo Perdido</h1>
-<p>Descubra quanto tempo você já viveu, quanto tempo resta até 80 anos e quanto tempo passou dormindo. Ferramenta online gratuita e interativa</p>
-</header>
+<h1>⏳ Seu Tempo de Vida</h1>
 
-<div class="anuncio">Espaço para anúncio</div>
+<input type="date" id="dataNascimento">
+<br><br>
 
-<nav>
-<button onclick="mostrar('relogio')">⏳ Relógio</button>
-<button onclick="mostrar('dias')">📅 Dias Restantes</button>
-<button onclick="mostrar('tempo')">💤 Tempo Perdido</button>
-<button onclick="mostrar('amor')">❤️ Compatibilidade</button>
-</nav>
+<button onclick="iniciarRelogio()">🧬 Relógio da Vida</button>
+<button onclick="calcularRestante()">⏳ Tempo Restante</button>
+<button onclick="calcularDormindo()">😴 Tempo Dormindo</button>
 
 <!-- RELÓGIO -->
-<div id="relogio" class="secao">
-<h2>Relógio da Vida</h2>
-<input type="date" id="dataNascimento">
-<br>
-<button onclick="iniciarRelogio()">Iniciar</button>
-<div id="contador" class="resultado">
+<div class="resultado">
   <div>🧬 <span id="anos">0</span> anos</div>
   <div>📅 <span id="meses">0</span> meses</div>
   <div>🌎 <span id="dias">0</span> dias</div>
@@ -130,50 +77,11 @@ footer{
   <div>⚡ <span id="segundos">0</span> segundos</div>
 </div>
 
-<!-- DIAS RESTANTES -->
-<div id="dias" class="secao">
-<h2>Tempo Restante até 80 anos</h2>
-<input type="date" id="dataDias">
-<br>
-<button onclick="calcularDias()">Calcular</button>
-<div id="resultadoDias" class="resultado"></div>
-</div>
-
-<!-- TEMPO PERDIDO -->
-<div id="tempo" class="secao">
-<h2>Tempo Perdido Dormindo</h2>
-<input type="number" id="idadeTempo" placeholder="Sua idade">
-<br>
-<button onclick="calcularTempo()">Calcular</button>
-<div id="resultadoTempo" class="resultado"></div>
-</div>
-
-<!-- COMPATIBILIDADE -->
-<div id="amor" class="secao">
-<h2>Compatibilidade de Nomes</h2>
-<input type="text" id="nome1" placeholder="Nome 1">
-<input type="text" id="nome2" placeholder="Nome 2">
-<br>
-<button onclick="calcularAmor()">Calcular</button>
-<div id="resultadoAmor" class="resultado"></div>
-</div>
-
-<div class="anuncio">Espaço para anúncio</div>
-
-<footer>
-<a href="sobre.html">Sobre</a> |
-<a href="politica.html">Política de Privacidade</a>
-</footer>
+<div id="tempoRestante" class="resultado"></div>
+<div id="tempoDormindo" class="resultado"></div>
 
 <script>
-function mostrar(id){
-  document.querySelectorAll('.secao').forEach(sec=>{
-    sec.style.display="none";
-  });
-  document.getElementById(id).style.display="block";
-}
 
-// RELÓGIO
 let intervalo;
 
 function iniciarRelogio(){
@@ -206,65 +114,52 @@ function iniciarRelogio(){
   }, 1000);
 }
 
-// DIAS RESTANTES
-function calcularDias(){
+function calcularRestante(){
 
-  const nascimento = new Date(document.getElementById("dataDias").value);
-  const expectativa = new Date(nascimento);
-  expectativa.setFullYear(expectativa.getFullYear() + 80);
-
+  const nascimento = new Date(document.getElementById("dataNascimento").value);
   const agora = new Date();
-  const diff = expectativa - agora;
 
-  if(diff <= 0){
-    document.getElementBy("resultadoDias").innerHTML =
-      "Você já ultrapassou a estimativa de 80 anos 👏";
+  const expectativaVida = 80;
+  const idadeAtual = (agora - nascimento) / (1000 * 60 * 60 * 24 * 365.25);
+  const anosRestantes = expectativaVida - idadeAtual;
+
+  if(anosRestantes <= 0){
+    document.getElementById("tempoRestante").innerHTML =
+      "<div>Você já ultrapassou a média de expectativa 🎉</div>";
     return;
   }
 
-  const horas = Math.floor(diff / (1000 * 60 * 60));
-  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const meses = Math.floor(dias / 30.44);
+  const diasRestantes = Math.floor(anosRestantes * 365.25);
+  const mesesRestantes = Math.floor(diasRestantes / 30.44);
 
-  document.getElementById("resultadoDias").innerHTML = `
-    <div>📅 ${meses.toLocaleString()} meses restantes</div>
-    <div>🌎 ${dias.toLocaleString()} dias restantes</div>
-    <div>⏰ ${horas.toLocaleString()} horas restantes</div>
+  document.getElementById("tempoRestante").innerHTML = `
+    <div>⏳ ${Math.floor(anosRestantes)} anos restantes</div>
+    <div>📅 ${mesesRestantes.toLocaleString()} meses restantes</div>
+    <div>🌎 ${diasRestantes.toLocaleString()} dias restantes</div>
   `;
 }
 
-// TEMPO PERDIDO
-function calcularTempo(){
+function calcularDormindo(){
 
-  const idade = parseFloat(document.getElementById("idadeTempo").value);
+  const nascimento = new Date(document.getElementById("dataNascimento").value);
+  const agora = new Date();
 
-  if(isNaN(idade) || idade <= 0){
-    document.getElementById("resultadoTempo").innerHTML =
-      "Digite uma idade válida.";
-    return;
-  }
+  const diferenca = agora - nascimento;
+  const diasVividos = diferenca / (1000 * 60 * 60 * 24);
 
-  // Total de dias dormindo (1/3 da vida)
-  const totalDias = (idade * 365.25) / 3;
+  const diasDormindo = diasVividos * (8 / 24);
 
-  const totalAnos = totalDias / 365.25;
-  const totalMeses = totalDias / 30;
-  
-  document.getElementById("resultadoTempo").innerHTML = `
-    <div>🛌 ${totalAnos.toFixed(1)} anos dormindo</div>
-    <div>📅 ${Math.floor(totalMeses).toLocaleString()} meses dormindo</div>
-    <div>🌎 ${Math.floor(totalDias).toLocaleString()} dias dormindo</div>
+  const anosDormindo = Math.floor(diasDormindo / 365.25);
+  const mesesDormindo = Math.floor(diasDormindo / 30.44);
+  const diasRestantes = Math.floor(diasDormindo % 30.44);
+
+  document.getElementById("tempoDormindo").innerHTML = `
+    <div>😴 ${anosDormindo} anos dormindo</div>
+    <div>📅 ${mesesDormindo.toLocaleString()} meses dormindo</div>
+    <div>🌙 ${diasRestantes} dias dormindo</div>
   `;
 }
 
-// COMPATIBILIDADE
-function calcularAmor(){
-  const nome1=document.getElementById("nome1").value;
-  const nome2=document.getElementById("nome2").value;
-  const porcentagem=Math.floor(Math.random()*101);
-  document.getElementById("resultadoAmor").innerText=
-  nome1+" e "+nome2+" têm "+porcentagem+"% de compatibilidade.";
-}
 </script>
 
 </body>
